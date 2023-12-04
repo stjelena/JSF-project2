@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Narudzbina</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:dataTable value="#{kupacManagedBean.allProducts}" var="product">
+                
+                <h:column>
+                     <f:facet name="header">Naziv</f:facet>
+                     <h:outputText value="#{product.naziv}"></h:outputText>
+                </h:column>
+              
+
+                <h:column>
+                      <f:facet name="header">Kolicina</f:facet>
+                      <h:outputText value="#{product.kolicina}"
+                                               rendered="#{product.kupiti and product.kolicina gt 0}"></h:outputText>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="Ukloni"></f:facet>
+                        <h:commandButton value="Ukloniti" action="#{kupacManagedBean.remove(product)}"
+                                         rendered="#{product.kupiti and product.kolicina gt 0}"></h:commandButton>
+                </h:column>
+            </h:dataTable>
+            
+            <h:commandButton value="Potvrdi" action="#{kupacManagedBean.order()}"></h:commandButton>
+        </h:form>
+    </h:body>
+</html>
+
